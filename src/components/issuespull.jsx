@@ -10,7 +10,8 @@ const Issues = props => {
         url:
         {issue.url}
       </p>
-      <p>THIS IS ACTIVE</p>
+
+      <p>This request is :{issue.state}</p>
     </div>
   );
 };
