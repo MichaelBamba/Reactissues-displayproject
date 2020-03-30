@@ -8,7 +8,7 @@ const Issues = props => {
       <p> Reporter: {issue.user.login}</p>
       <p>
         url:
-        {issue.url}
+        <a href={issue.url}> {issue.url}</a>
       </p>
 
       <p>This request is :{issue.state}</p>
