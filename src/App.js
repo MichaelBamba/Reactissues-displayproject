@@ -19,12 +19,6 @@ class App extends Component {
     return data;
   };
 
-
-    this.setState({
-      issueData: newissueData
-    });
-  };
-
   async componentDidMount() {
     const issueData = await this.issueData();
 
