@@ -19,8 +19,6 @@ class App extends Component {
     return data;
   };
 
-  handleClick = async () => {
-    const newissueData = await this.issueData();
 
     this.setState({
       issueData: newissueData
