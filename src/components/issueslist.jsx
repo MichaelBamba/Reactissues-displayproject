@@ -1,22 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
+
 import Issues from "./issuespull";
 
-const IssuesList = props => {
-  const { issueData } = props;
-  console.log(props);
-  return (
-    <ul className="issuesList">
-      {issueData.length > 0 ? (
-        issueData.map(issue => (
-          <li className="issues" key={issueData.url}>
-            <Issues issue={issue} />
-          </li>
-        ))
-      ) : (
-        <li>No issueData Data</li>
-      )}
-    </ul>
-  );
-};
+class IssueList extends Component {
+  state = {
+    issues: []
+  };
 
-export default IssuesList;
+  async componentDidMount() {
+    const { issueData } = await fetch(
+      "https://api.github.com/repos/facebook/create-react-app/issues"
+    );
+    this.setState({
+      issues: issueData
+    });
+  }
+
+  render() {
+    const { issues } = this.state;
+
+    return (
+      <ul>
+        {issues.length > 0 ? (
+          issues.map(issue => <Issues key={issues.id} issue={issue} />)
+        ) : (
+          <li>No issueData Data</li>
+        )}
+      </ul>
+    );
+  }
+}
+
+export default IssueList;
