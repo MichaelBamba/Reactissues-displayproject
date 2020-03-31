@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Issuedetail extends Component {
   state = {
-    issueDetails: []
+    Details: []
   };
 
   async componentDidMount() {
@@ -12,7 +12,7 @@ class Issuedetail extends Component {
     );
     const detail = await issueDetail.json();
     this.setState({
-      issueDetails: detail
+      Details: detail
     });
     console.log(detail);
 
@@ -22,8 +22,13 @@ class Issuedetail extends Component {
   }
 
   render() {
-    const { issueDetail } = this.state;
-    return <div>{issueDetail.title}</div>;
+    const { Details } = this.state;
+    return (
+      <div>
+        {Details.title}
+        <p>{Details.body} </p>
+      </div>
+    );
   }
 }
 
