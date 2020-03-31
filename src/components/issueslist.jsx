@@ -8,12 +8,14 @@ class IssueList extends Component {
   };
 
   async componentDidMount() {
-    const { issueData } = await fetch(
+    const response = await fetch(
       "https://api.github.com/repos/facebook/create-react-app/issues"
     );
+    const data = response.json();
     this.setState({
-      issues: issueData
+      issues: data
     });
+    console.log(data);
   }
 
   render() {
@@ -22,7 +24,7 @@ class IssueList extends Component {
     return (
       <ul>
         {issues.length > 0 ? (
-          issues.map(issue => <Issues key={issues.id} issue={issue} />)
+          issues.map(issue => <li Issues key={issues.id} issue={issue} />)
         ) : (
           <li>No issueData Data</li>
         )}
