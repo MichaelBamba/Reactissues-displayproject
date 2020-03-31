@@ -1,32 +1,39 @@
 import React, { Component } from "react";
-
-import Issues from "./issuespull";
+import { Link } from "react-router-dom";
 
 class IssueList extends Component {
-  state = {
-    issues: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      Issues: []
+    };
+  }
 
   async componentDidMount() {
     const response = await fetch(
       "https://api.github.com/repos/facebook/create-react-app/issues"
     );
-    const data = response.json();
+    const data = await response.json();
     this.setState({
-      issues: data
+      Issues: data
     });
     console.log(data);
   }
 
   render() {
-    const { issues } = this.state;
+    const { Issues } = this.state;
 
     return (
       <ul>
-        {issues.length > 0 ? (
-          issues.map(issue => <li Issues key={issues.id} issue={issue} />)
+        {Issues.length > 0 ? (
+          Issues.map(issue => (
+            <li key={issue.id}>
+              <p>{issue.title}</p>
+              <Link to={`/issue/${issue.number}`}> Details</Link>
+            </li>
+          ))
         ) : (
-          <li>No issueData Data</li>
+          <li>No Data</li>
         )}
       </ul>
     );
